@@ -477,7 +477,7 @@ function search(input) {
 
 function link(input) {
   if (input !== "") {
-    window.location.assign(`https://www.${input}`);
+    window.location.assign(`https://${input}`);
     return;
   }
   return;
