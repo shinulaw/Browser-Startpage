@@ -345,7 +345,6 @@ function writePrompt() {
     "/"
   )}<span class='prompt-cursor' id="promptSymb">${promptSymbol}</span></div>
     `;
-  console.log(termSearch);
   termSearch.innerHTML = `
     <input type="text" spellcheck="false" id="setter" autocomplete="off">
     <div id="getter">
@@ -476,6 +475,14 @@ function search(input) {
   return;
 }
 
+function link(input) {
+  if (input !== "") {
+    window.location.assign(`https://www.${input}`);
+    return;
+  }
+  return;
+}
+
 function changeEngine(searchEng) {
   let currentSearchUrl = searchEng;
   if (searchEng) {
@@ -499,6 +506,10 @@ const COMMANDS = {
 
   search: {
     func: joinWriter(search),
+  },
+
+  link: {
+    func: joinWriter(link),
   },
 
   searchEng: {
@@ -581,6 +592,8 @@ function runCommand(cmd) {
         response = COMMANDS.searchEng.func(parsedCmd[2]);
       } else if (parsedCmd[1] == "theme") {
         response = COMMANDS.theme.func(parsedCmd[2]);
+      } else if (parsedCmd[1] == "link") {
+        response = COMMANDS.link.func(parsedCmd[2]);
       } else {
         response = COMMANDS[parsedCmd[1]].func(
           parsedCmd.slice(2, parsedCmd.length)
